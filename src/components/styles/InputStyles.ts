@@ -29,9 +29,7 @@ export const Input = styled.input<any>`
     background-color: ${(props) => props.bgColor};
     color: ${(props) => props.color};
     outline:none;
-
-    ${(props) => props.kindOf === `search` && `width : 100%`};
-    ${(props) => props.kindOf === `search` && `border-radius : 0`};
+    border-radius : 0
 
     &:focus {
         border: 1px solid #0071f4;

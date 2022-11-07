@@ -1,4 +1,3 @@
-import { withResizeDetector } from "react-resize-detector";
 import {
     Wrapper,
     LinkClick,
@@ -167,4 +166,4 @@ const NavbarPresenter = ({
 
 }
 
-export default withResizeDetector(NavbarPresenter);
+export default NavbarPresenter;

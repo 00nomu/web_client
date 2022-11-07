@@ -9,9 +9,9 @@ const refreshDataOne = async (
     switch (componentTitle) {
         case "customer":
             // 이미 등록된 파일이 있는지 확인
-            await axios.get(`/api/file`, { params: { file_customer_code: item.customer_code } })
+            await axios.get(`/java/file/customercode`, { params: { file_customer_code: item.customer_code } })
                 .then(({ data }) => {
-                    if (data.success) {
+                    if (data.success && data.result) {
                         fileDispatch({ type: 'listClick', value: data.result })
                     }
                     else {

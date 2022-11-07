@@ -1,4 +1,3 @@
-import { withResizeDetector } from "react-resize-detector";
 import {
     WholeWrapperDiv,
 } from "../../styles/AllStyles";
@@ -7,9 +6,12 @@ import PageBoxComponent from "./subComponent/PageBoxComponent";
 import NodataComponent from "./subComponent/NodataComponent";
 import ListHeaderComponent from "./subComponent/ListHeaderComponent";
 import ListBodyComponent from "./subComponent/ListBodyComponent";
+import { SCREEN_SIZE } from "../../../Lib/consts";
+import ListMobileHeaderComponent from "./subComponent/ListMobileHeaderComponent";
+import ListMobileBodyComponent from "./subComponent/ListMobileBodyComponent";
 
 const ListPresenter = ({
-    width,
+    windowWidth,
 
     commonState,
     commonDispatch,
@@ -27,25 +29,49 @@ const ListPresenter = ({
     return (
         <WholeWrapperDiv index={`-1`}>
             {/* 테이블헤더 */}
-            <ListHeaderComponent
-                commonState={commonState}
-                commonDispatch={commonDispatch}
-            />
+            {
+                windowWidth < SCREEN_SIZE.MOBILE ?
+                    <ListMobileHeaderComponent
+                        commonState={commonState}
+                        commonDispatch={commonDispatch}
+                    />
+                    :
+                    <ListHeaderComponent
+                        commonState={commonState}
+                        commonDispatch={commonDispatch}
+                    />
+
+            }
 
             {(dataList.length === 0 && isLoading === false) ? // 데이터가 존재하지 않을경우
                 <NodataComponent />
 
                 : // 데이터가 존재할 경우
-                <ListBodyComponent
-                    commonState={commonState}
-                    commonDispatch={commonDispatch}
+                windowWidth < SCREEN_SIZE.MOBILE ?
+                    <ListMobileBodyComponent
+                        commonState={commonState}
+                        commonDispatch={commonDispatch}
 
-                    state={state}
-                    dispatch={dispatch}
+                        state={state}
+                        dispatch={dispatch}
 
-                    fileState={fileState}
-                    fileDispatch={fileDispatch}
-                />
+                        fileState={fileState}
+                        fileDispatch={fileDispatch}
+                    />
+                    :
+                    <ListBodyComponent
+                        commonState={commonState}
+                        commonDispatch={commonDispatch}
+
+                        state={state}
+                        dispatch={dispatch}
+
+                        fileState={fileState}
+                        fileDispatch={fileDispatch}
+                    />
+
+
+
             }
             {/* 페이지 */}
             <PageBoxComponent
@@ -56,4 +82,4 @@ const ListPresenter = ({
     )
 }
 
-export default React.memo(withResizeDetector(ListPresenter));
+export default React.memo(ListPresenter);

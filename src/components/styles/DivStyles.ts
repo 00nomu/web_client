@@ -17,7 +17,7 @@ export const WholeWrapperDiv = styled.div<any>`
     margin: ${(props) => props.margin};
     z-index: ${(props) => props.index};
     animation: ${appearAnimation} 1s forwards;
-    overflow-x: hidden;
+    overflow-x: ${(props) => props.overflowX || `auto`};
     overflow-y: ${(props) => props.overflowY};
     display: ${(props) => props.display || `flex`};
     justify-content: ${(props) => props.ju};

@@ -1,5 +1,3 @@
-import { withResizeDetector } from "react-resize-detector";
-
 import {
     HeaderWrapper,
     HeaderInner,
@@ -22,8 +20,7 @@ import Image from "next/image";
 
 import router from "next/router";
 
-import Modal from "react-modal"
-import MyPage from "./MyPage";
+import { SCREEN_SIZE } from "../../../../../Lib/consts";
 
 export const HeaderWrap = styled.div<any>`
   width: ${(props) => props.width};
@@ -41,20 +38,8 @@ export const HeaderWrap = styled.div<any>`
   justify-content: ${(props) => props.ju};
 `;
 
-
-// const myPageItem = styled.div<any>`
-//     bgColor={Theme.basic_white}
-//     border={`1px solid ${Theme.grey_v2}`}
-//     shadow={`0 0 10px rgba(0,0,0,0.1)`}
-//     transition={`0.5s`}
-//     isAbsolute={true}
-//     bottom={`-80px`}
-//     radius={`5px`}
-//     overflow={`hidden`}
-// `;
-
 const HeaderPresenter = ({
-    width,
+    windowWidth,
     barClickHandler,
     LogoutHandler,
     headerOpen,
@@ -89,16 +74,12 @@ const HeaderPresenter = ({
                     width={`20%`}
                     onClick={(e: any) => { router.push(`/view/customer`) }}
                 >
-                    {/* <LogoInner>
-                            <Image
-                                src={`/images/ilsa-logo.png`}
-                                layout={`fill`}
-                                alt={``}
-                            />
-                        </LogoInner> */}
-                    <span style={{ color: Theme.light_blue, fontWeight: "bold", fontSize: 20 }}>
-                        공공노무법인 대전지사
-                    </span>
+                    {
+                        windowWidth < SCREEN_SIZE.MOBILE ? <></> :
+                            <span style={{ color: Theme.light_blue, fontWeight: "bold", fontSize: 20 }}>
+                                공공노무법인 대전지사
+                            </span>
+                    }
                 </LogoWrapper>
                 {/* menu */}
                 <MyPageButton>
@@ -205,4 +186,4 @@ const HeaderPresenter = ({
     )
 }
 
-export default withResizeDetector(HeaderPresenter);
+export default HeaderPresenter;

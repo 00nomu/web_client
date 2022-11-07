@@ -7,11 +7,12 @@ import { warrantCompanyCode, warrantCompanyName, warrantMainTypeArray, warrantSe
 import { searchIcon } from "../../../../Lib/svg";
 import { axiosReadListHandler } from "../../../../modules/axios/axiosCRUD";
 import { Button, FilterBox, Input, Select } from "../../../styles/common/UtillComponents"
+import { SCREEN_SIZE } from "../../../../Lib/consts";
 
 const SelectBoxComponent = ({
+    windowWidth,
     commonState,
     commonDispatch,
-
 }: any) => {
 
     const {
@@ -29,7 +30,6 @@ const SelectBoxComponent = ({
                 commonDispatch({ name: "searchSubSelectBox", value: "직접입력" });
                 commonDispatch({ name: "searchSelectBox", value: e.target.value });
             } else {
-                console.log("value : ", e.target.value)
                 commonDispatch({ name: "searchSubSelectBox", value: "직접입력" });
                 commonDispatch({ name: "searchSelectBox", value: e.target.value });
                 commonDispatch({ name: "searchText", value: "" });
@@ -72,27 +72,24 @@ const SelectBoxComponent = ({
                     <FilterBox
                         kindOf={`temporary`}
                     >
-                        <span>내용</span>
-                        <Select
-                            kindOf={`filter`}
-                            name={`select_main`}
-                            value={searchSelectBox}
-                            onChange={(e: any) => { selectBoxChangeHandler(e) }}
-                        >
-                            {selectTitle.map((item: any, i: any) => (
-                                <option key={i} value={selectData[i]} >{item} </option>
-                            ))}
-                        </Select>
-                        {searchSelectBox === '전체' ? (
-                            <Input
-                                kindOf={`search`}
-                                type={`text`}
-                                value={searchText}
-                                onChange={(e: any) => { commonDispatch({ name: "searchText", value: e.target.value }); }}
-                                placeholder={`검색어를 입력 후 엔터를 눌러주세요.`}
-                            />
-                        ) :
-                            (searchSelectBox === 'customer_name') ?
+                        {windowWidth > SCREEN_SIZE.MOBILE &&
+                            <Select
+                                kindOf={`filter`}
+                                name={`select_main`}
+                                value={searchSelectBox}
+                                onChange={(e: any) => { selectBoxChangeHandler(e) }}
+                            >
+                                {selectTitle.map((item: any, i: any) => (
+                                    <option key={i} value={selectData[i]} >{item} </option>
+                                ))}
+                            </Select>
+                        }
+                        {searchSelectBox === '전체' ||
+                            searchSelectBox === 'customer_name' ||
+                            searchSelectBox === 'customer_owner_name' ||
+                            searchSelectBox === 'customer_muser_id'
+
+                            ? (
                                 <Input
                                     kindOf={`search`}
                                     type={`text`}
@@ -100,17 +97,21 @@ const SelectBoxComponent = ({
                                     onChange={(e: any) => { commonDispatch({ name: "searchText", value: e.target.value }); }}
                                     placeholder={`검색어를 입력 후 엔터를 눌러주세요.`}
                                 />
+                            )
+                            :
+                            (searchSelectBox === 'customer_create_route') ?
+                                <Select
+                                    kindOf={`filter`}
+                                    nmae={`select_sub`}
+                                    value={searchText}
+                                    onChange={(e: any) => { commonDispatch({ name: "searchText", value: e.target.value }); }}
+                                >
+                                    <option value={'웹'} >웹</option>
+                                    <option value={'모바일'} >모바일</option>
+                                </Select>
                                 :
-                                (searchSelectBox === 'customer_owner_name') ?
-                                    <Input
-                                        kindOf={`search`}
-                                        type={`text`}
-                                        value={searchText}
-                                        onChange={(e: any) => { commonDispatch({ name: "searchText", value: e.target.value }); }}
-                                        placeholder={`검색어를 입력 후 엔터를 눌러주세요.`}
-                                    />
-                                    :
-                                    (searchSelectBox === 'customer_muser_id') ?
+                                <>
+                                    {searchSubSelectBox === '직접입력' ? (
                                         <Input
                                             kindOf={`search`}
                                             type={`text`}
@@ -118,31 +119,10 @@ const SelectBoxComponent = ({
                                             onChange={(e: any) => { commonDispatch({ name: "searchText", value: e.target.value }); }}
                                             placeholder={`검색어를 입력 후 엔터를 눌러주세요.`}
                                         />
-                                        :
-                                        (searchSelectBox === 'customer_create_route') ?
-                                            <Select
-                                                kindOf={`filter`}
-                                                nmae={`select_sub`}
-                                                value={searchText}
-                                                onChange={(e: any) => { commonDispatch({ name: "searchText", value: e.target.value }); }}
-                                            >
-                                                <option value={'웹'} >웹</option>
-                                                <option value={'모바일'} >모바일</option>
-                                            </Select>
-                                            :
-                                            <>
-                                                {searchSubSelectBox === '직접입력' ? (
-                                                    <Input
-                                                        kindOf={`search`}
-                                                        type={`text`}
-                                                        value={searchText}
-                                                        onChange={(e: any) => { commonDispatch({ name: "searchText", value: e.target.value }); }}
-                                                        placeholder={`검색어를 입력 후 엔터를 눌러주세요.`}
-                                                    />
-                                                ) : (<>
-                                                </>)}
+                                    ) : (<>
+                                    </>)}
 
-                                            </>
+                                </>
                         }
 
                         <Button
@@ -253,26 +233,31 @@ const SelectBoxComponent = ({
                     <FilterBox
                         kindOf={`search`}
                     >
-                        <Select
-                            kindOf={`filter`}
-                            name={`select_main`}
-                            value={searchSelectBox}
-                            onChange={(e: any) => { selectBoxChangeHandler(e) }}
-                        >
-                            {warrantSelectTitle.map((item: any, i: any) => (
-                                <option key={i} value={warrantSelectData[i]} >{item}</option>
-                            ))}
-                            {commonState.loginData.user_auth < 2 &&
-                                <option key={4} value={'warrant_manage_code'} >업체명</option>
-                            }
-                        </Select>
+                        {windowWidth > SCREEN_SIZE.MOBILE &&
+                            <Select
+                                kindOf={`filter`}
+                                name={`select_main`}
+                                value={searchSelectBox}
+                                onChange={(e: any) => { selectBoxChangeHandler(e) }}
+                            >
+                                {warrantSelectTitle.map((item: any, i: any) => (
+                                    <option key={i} value={warrantSelectData[i]} >{item}</option>
+                                ))}
+                                {commonState.loginData.user_auth < 2 &&
+                                    <option key={4} value={'warrant_manage_code'} >업체명</option>
+                                }
+                            </Select>
+                        }
 
-                        {searchSelectBox === '전체' ? (
+                        {searchSelectBox === '전체' ||
+                            searchSelectBox === 'warrant_company_name' ||
+                            searchSelectBox === 'warrant_owner_name' ||
+                            searchSelectBox === 'warrant_company_code' ? (
                             <Input
                                 kindOf={`search`}
                                 type={`text`}
                                 value={searchText}
-                                onChange={(e: any) => { commonDispatch({ name: "searchText", value: e.target.value }); }} warrant_manage_name
+                                onChange={(e: any) => { commonDispatch({ name: "searchText", value: e.target.value }); }}
                                 placeholder={`검색어를 입력 후 엔터를 눌러주세요.`}
                             />
                         )
@@ -332,15 +317,6 @@ const SelectBoxComponent = ({
                                         }
 
                                     </Select>
-                                    {/* {searchSubSelectBox === '직접입력' && (
-                                            <Input
-                                                kindOf={`search`}
-                                                type={`text`}
-                                                value={searchText}
-                                                onChange={(e: any) => { commonDispatch({name:"searchText",value:e.target.value}); }}
-                                                placeholder={`검색어를 입력 후 엔터를 눌러주세요.`}
-                                            />
-                                        )} */}
                                 </>
 
                         }

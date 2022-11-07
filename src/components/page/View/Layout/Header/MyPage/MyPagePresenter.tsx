@@ -1,5 +1,3 @@
-import { withResizeDetector } from "react-resize-detector";
-
 import {
     WrapperDiv,
     GridBoxDiv,
@@ -149,4 +147,4 @@ const MyPagePresenter = ({
     )
 }
 
-export default withResizeDetector(MyPagePresenter);
+export default MyPagePresenter;

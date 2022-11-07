@@ -1,4 +1,3 @@
-import { withResizeDetector } from "react-resize-detector";
 import {
     WrapperDiv,
     TabMenuWrapperDiv,
@@ -64,4 +63,4 @@ const CHCPresenter = ({
     )
 }
 
-export default React.memo(withResizeDetector(CHCPresenter));
+export default React.memo(CHCPresenter);

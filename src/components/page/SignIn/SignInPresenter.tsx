@@ -1,4 +1,3 @@
-import { withResizeDetector } from "react-resize-detector";
 import {
     Wrapper,
 } from "../../styles/CommonComponents3";
@@ -290,4 +289,4 @@ const SigninPresenter = ({
     )
 }
 
-export default withResizeDetector(SigninPresenter);
+export default SigninPresenter;

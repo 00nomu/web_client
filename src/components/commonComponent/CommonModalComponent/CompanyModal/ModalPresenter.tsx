@@ -1,5 +1,3 @@
-import { withResizeDetector } from "react-resize-detector";
-
 import {
     WrapperDiv,
     GridBoxDiv,
@@ -167,4 +165,4 @@ const ModalPresenter = ({
     )
 }
 
-export default React.memo(withResizeDetector(ModalPresenter));
+export default React.memo(ModalPresenter);

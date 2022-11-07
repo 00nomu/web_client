@@ -1,4 +1,3 @@
-import { withResizeDetector } from "react-resize-detector";
 import {
     WholeWrapperDiv,
 } from "../../../styles/AllStyles";
@@ -30,4 +29,4 @@ const UserPresenter = ({
     )
 }
 
-export default React.memo(withResizeDetector(UserPresenter));
+export default React.memo(UserPresenter);

@@ -1,4 +1,3 @@
-import { withResizeDetector } from "react-resize-detector";
 import {
     Input,
     WholeWrapperDiv,
@@ -207,4 +206,4 @@ const ModalPresenter = ({
     )
 }
 
-export default React.memo(withResizeDetector(ModalPresenter));
+export default React.memo(ModalPresenter);

@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CUCPresenter from "./CUCPresenter";
 
 const CommonUtilComponent = (props: any) => {
@@ -23,6 +23,20 @@ const CommonUtilComponent = (props: any) => {
         startDateObject,
         endDateObject,
     } = commonState;
+
+    const [windowWidth, setWindowWidth] = useState(0);
+
+    const resizeWindow = () => {
+        setWindowWidth(window.innerWidth)
+    }
+
+    useEffect(() => {
+        setWindowWidth(window.innerWidth)
+        window.addEventListener("resize", resizeWindow)
+        return () => {
+            window.removeEventListener("resize", resizeWindow)
+        }
+    }, [windowWidth])
 
 
     useEffect(() => { // 라디오 버튼 클릭 시 날짜 정보 변경
@@ -65,6 +79,8 @@ const CommonUtilComponent = (props: any) => {
 
     return (
         <CUCPresenter
+            windowWidth={windowWidth}
+
             commonState={commonState}
             commonDispatch={commonDispatch}
 

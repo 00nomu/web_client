@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { axiosReadListHandler } from "../../../modules/axios/axiosCRUD";
 import CLCPresenter from "./CLCPresenter";
@@ -26,6 +26,20 @@ const CommonListComponent = (props: any) => {
 
     } = commonState;
 
+    const [windowWidth, setWindowWidth] = useState(0);
+
+    const resizeWindow = () => {
+        setWindowWidth(window.innerWidth)
+    }
+
+    useEffect(() => {
+        setWindowWidth(window.innerWidth)
+        window.addEventListener("resize", resizeWindow)
+        return () => {
+            window.removeEventListener("resize", resizeWindow)
+        }
+    }, [windowWidth])
+
     useEffect(() => {
         axiosReadListHandler(
             commonState,
@@ -35,6 +49,8 @@ const CommonListComponent = (props: any) => {
 
     return (
         <CLCPresenter
+            windowWidth={windowWidth}
+
             commonState={commonState}
             commonDispatch={commonDispatch}
 

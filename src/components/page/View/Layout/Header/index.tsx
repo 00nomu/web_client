@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from "next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import router from "next/router";
 
@@ -23,6 +23,20 @@ const Header: NextPage = (props: any) => {
     const [headerOpen, setHeaderOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
 
+    const [windowWidth, setWindowWidth] = useState(0);
+
+    const resizeWindow = () => {
+        setWindowWidth(window.innerWidth)
+    }
+
+    useEffect(() => {
+        setWindowWidth(window.innerWidth)
+        window.addEventListener("resize", resizeWindow)
+        return () => {
+            window.removeEventListener("resize", resizeWindow)
+        }
+    }, [windowWidth])
+
     const LogoutHandler = async () => {
         if (window.confirm('로그아웃 하시겠습니까?')) {
             await axiosLogoutHandler();
@@ -36,6 +50,7 @@ const Header: NextPage = (props: any) => {
 
     return (
         <HeaderPresenter
+            windowWidth={windowWidth}
             barClickHandler={barClickHandler}
             LogoutHandler={LogoutHandler}
             headerOpen={headerOpen}

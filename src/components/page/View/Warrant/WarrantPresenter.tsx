@@ -1,4 +1,3 @@
-import { withResizeDetector } from "react-resize-detector";
 import {
     WholeWrapperDiv,
 } from "../../../styles/AllStyles";
@@ -13,6 +12,7 @@ const MobileWarrantPresenter = ({
     width,
     warrantProps
 }: any) => {
+    warrantProps = { ...warrantProps, width }
     return (
         <WholeWrapperDiv
             ai={`center`}
@@ -30,4 +30,4 @@ const MobileWarrantPresenter = ({
     )
 }
 
-export default React.memo(withResizeDetector(MobileWarrantPresenter));
+export default React.memo(MobileWarrantPresenter);
