@@ -1,5 +1,7 @@
 
+import { useEffect, useState } from "react";
 import Modal from "react-modal"
+import { SCREEN_SIZE } from "../../../Lib/consts";
 import CompanyModal from "./CompanyModal";
 import CustomerModal from "./CustomerModal";
 import MobileUserModal from "./MobileUserModal";
@@ -16,6 +18,20 @@ const CommonModalComponent = (props: any) => {
     const {
         modalOpen
     } = commonState;
+
+    const [windowWidth, setWindowWidth] = useState(0);
+
+    const resizeWindow = () => {
+        setWindowWidth(window.innerWidth)
+    }
+
+    useEffect(() => {
+        setWindowWidth(window.innerWidth)
+        window.addEventListener("resize", resizeWindow)
+        return () => {
+            window.removeEventListener("resize", resizeWindow)
+        }
+    }, [windowWidth])
 
     const ModalComponent = (componentTitle: any, props: any) => {
         switch (componentTitle) {
@@ -65,9 +81,10 @@ const CommonModalComponent = (props: any) => {
                 content: {
                     background: "#F4F4F4",
                     top: 0,
-                    overflowY: "auto",
+                    overflowY: "scroll",
                     position: "relative",
                     border: "none",
+                    height: windowWidth < SCREEN_SIZE.MOBILE ? "90vh" : "null",
                     borderRadius: "0.3rem",
                     inset: 0,
                     padding: "0px",
