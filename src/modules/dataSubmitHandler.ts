@@ -36,7 +36,7 @@ const dataSubmitHandler = async (
                 break;
 
             case "warrant":
-                // 법인 도장
+                // 인감도장
                 if (fileState.warrant_stamp_object !== '') {
                     await axiosFileUploadHandler(
                         state.warrant_company_code,
@@ -80,7 +80,7 @@ const dataSubmitHandler = async (
                     )
                 }
 
-                // 위임장 최종결과
+                // 인감증명서
                 if (fileState.warrant_complete_object !== '') {
                     await axiosFileUploadHandler(
                         state.warrant_company_code,

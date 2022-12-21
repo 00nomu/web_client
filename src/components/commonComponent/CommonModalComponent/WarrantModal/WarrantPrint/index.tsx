@@ -45,7 +45,9 @@ const WarrantPrint = (props: any) => {
 
     const classes = useStyles();
 
-    const data = props.data;
+    const data = props?.data;
+
+
 
     const today = new Date();
 
@@ -56,7 +58,7 @@ const WarrantPrint = (props: any) => {
             <div
                 ref={props.printRef}
             >
-                {(data === {}) ? null :
+               
                     <div
                         style={{
                             padding: "50px",
@@ -123,7 +125,7 @@ const WarrantPrint = (props: any) => {
                         </TableContainer>
                         <span style={{ padding: "30px 0" }}>상기 위임내용에 관한 일체의 행위를 위임합니다.</span>
                         <span style={{ padding: "30px 0" }}>{data.warrant_sign_date ? <>{data.warrant_sign_date.substring(0, 4)}년 {data.warrant_sign_date.substring(5, 7)}월 {data.warrant_sign_date.substring(8, 10)}일</> : ""}</span>
-                        <div style={{ display: "flex" }}>
+                        {/* <div style={{ display: "flex" }}>
                             <span style={{}}>위임인 성명 : </span>
                             <div style={{ borderBottom: "1px solid black", paddingLeft: "200px", paddingBottom: "3px" }}>
                                 {data.warrant_owner_name} &nbsp;&nbsp;
@@ -132,9 +134,80 @@ const WarrantPrint = (props: any) => {
                                 }
                                 (서명 또는 인)
                             </div>
-                        </div>
+                        </div> */}
+
+
+        {(function () {
+            if(data.warrant_company_type === 0)
+                return (
+                    <TableContainer style={{marginTop : 20,}}>
+                        <Table width={'100%'} aria-label="simple table">
+                            <TableRow>
+                                <TableCell className={classes.TableData} style={{width : '50%'}}>대표자 성명</TableCell>
+                                <TableCell className={classes.TableData} style={{width : '50%'}} >대표자 서명</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell className={classes.TableData} style={{width : '50%'}}>{data.warrant_owner_name}</TableCell>
+                                <TableCell className={classes.TableData} style={{width : '50%'}}><img style={{ width: "50px", height: "30px" }} src={props.data.warrant_sign_pad} /></TableCell>
+                            </TableRow>
+                        </Table>
+                    </TableContainer>
+                );
+
+                if(data.warrant_company_type === 1 && data.warrant_stamp_name === null) // 법인인데 인감도장 안올리면 서명으로
+                return (
+                    <TableContainer style={{marginTop : 20,}}>
+                        <Table width={'100%'} aria-label="simple table">
+                            <TableRow>
+                                <TableCell className={classes.TableData} style={{width : '50%'}}>대표자 성명</TableCell>
+                                <TableCell className={classes.TableData} style={{width : '50%'}} >대표자 서명</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell className={classes.TableData} style={{width : '50%'}}>{data.warrant_owner_name}</TableCell>
+                                <TableCell className={classes.TableData} style={{width : '50%'}}><img style={{ width: "50px", height: "30px" }} src={props.data.warrant_sign_pad} /></TableCell>
+                            </TableRow>
+                        </Table>
+                    </TableContainer>
+
+
+
+                );
+
+                if(data.warrant_company_type === 1 && data.warrant_stamp_name !== null) // 법인인데 인감도장 올렸으면 인감도장으로
+                return (
+                    <TableContainer style={{marginTop : 20,}}>
+                        <Table width={'100%'} aria-label="simple table">
+                            <TableRow>
+                                <TableCell className={classes.TableData} style={{width : '50%'}}>대표자 성명</TableCell>
+                                <TableCell className={classes.TableData} style={{width : '50%'}} >인감도장</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell className={classes.TableData} style={{width : '50%'}}>{data.warrant_owner_name}</TableCell>
+                                <TableCell className={classes.TableData} style={{width : '50%'}}><img style={{ width: "50px", height: "30px" }} src={props.data.warrant_stamp_image} /></TableCell>
+                            </TableRow>
+                        </Table>
+                    </TableContainer>
+
+
+
+                );
+
+            })()}
+
+
+
+
+
+                        
+                    
+
+                       
+
+                                
+                        
+
                     </div>
-                }
+              
             </div>
         </div>
     )

@@ -154,6 +154,8 @@ export const warrantInitState = () => {
         warrant_sign: "",
         warrant_sign_pad: "",
 
+        warrant_stamp_image: "",
+
         warrant_personal_reg_card_name: "",
         warrant_personal_reg_card_path: "",
 

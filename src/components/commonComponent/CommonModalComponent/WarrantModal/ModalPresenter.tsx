@@ -133,128 +133,7 @@ const ModalPresenter = ({
                                 <Article kindOf={`scroll`}>
                                     <Article kindOf={`padding-r15`}>
                                         <WrapperDiv kindOf={`margin30`}>
-                                            <GridBoxDiv
-                                                gtc={`8.5fr 1.5fr`}
-                                                gap={`10px`}
-                                                kindOf={`inputFirst`}
-                                            >
-                                                <TextField
-                                                    label={`법인 위임장(업체 업로드)`}
-                                                    type='text'
-                                                    color='primary'
-                                                    size='small'
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                    }}
-                                                    value={state.warrant_complete_name}
-                                                    disabled={true}
-                                                />
-
-                                                <Button className={buttonStyles.buttonUpload} variant='contained' component="label">
-                                                    <input hidden
-                                                        name={`file_object`}
-                                                        accept="application/pdf"
-                                                        type='file'
-                                                        onChange={(e: any) => {
-                                                            let reader = new FileReader();
-                                                            let file = e.target.files[0];
-                                                            if (file) {
-                                                                reader.onloadend = () => {
-                                                                    fileDispatch({ name: "warrant_complete_object", value: file });
-                                                                    fileDispatch({ name: 'warrant_complete_url', value: reader.result });
-                                                                    // fileDispatch({ name: 'file_kinds', value: 'business' });
-
-                                                                    dispatch({ name: 'warrant_complete_name', value: file.name })
-                                                                };
-                                                                reader.readAsDataURL(file);
-                                                            }
-                                                            else {
-                                                                fileDispatch({ name: "warrant_complete_object", value: '' });
-                                                            }
-                                                        }}
-                                                    />
-                                                    업로드
-                                                </Button>
-
-                                            </GridBoxDiv>
-                                            {(fileState.warrant_complete_url !== '' || (state.warrant_complete_path && (state.warrant_complete_path !== ''))) &&
-                                                <GridBoxDiv
-                                                    gtc={`repeat(1, 1fr)`}
-                                                    gap={`10px`}
-                                                    kindOf={`inputFirst`}
-                                                >
-                                                    <Button
-                                                        className={buttonStyles.buttonGrey}
-                                                        variant="contained"
-                                                        id={fileState.warrant_complete_url !== '' ? fileState.warrant_complete_url : "https://00nomubucket1.s3.ap-northeast-2.amazonaws.com/" + state.warrant_complete_path}
-                                                        onClick={(e: any) => downloadPdfHandler(e.target.id, state.warrant_complete_name)}
-                                                    >
-                                                        <DownloadIcon sx={{ marginRight: `5px` }} fontSize="small" />다운로드
-                                                    </Button>
-                                                </GridBoxDiv>
-                                            }
-                                            <GridBoxDiv
-                                                gtc={`8.5fr 1.5fr`}
-                                                gap={`10px`}
-                                                kindOf={`input`}
-                                            >
-                                                <TextField
-                                                    label={`법인 도장(업체 업로드)`}
-                                                    type='text'
-                                                    color='primary'
-                                                    size='small'
-                                                    InputLabelProps={{
-                                                        shrink: true,
-                                                    }}
-                                                    value={state.warrant_stamp_name ? state.warrant_stamp_name : state.warrant_stamp_path ? "image.png" : ""}
-                                                    disabled={true}
-                                                />
-
-                                                <Button className={buttonStyles.buttonUpload} variant='contained' component="label">
-                                                    <input hidden
-                                                        name={`file_object`}
-                                                        accept='image/gif, image/png, image/jpeg, image/bmp, image/webp'
-                                                        type='file'
-                                                        onChange={(e: any) => {
-                                                            let reader = new FileReader();
-                                                            let file = e.target.files[0];
-                                                            if (file) {
-                                                                reader.onloadend = () => {
-                                                                    fileDispatch({ name: "warrant_stamp_object", value: file });
-                                                                    fileDispatch({ name: 'warrant_stamp_url', value: reader.result });
-                                                                    // fileDispatch({ name: 'file_kinds', value: 'business' });
-
-                                                                    dispatch({ name: 'warrant_stamp_name', value: file.name })
-                                                                };
-                                                                reader.readAsDataURL(file);
-                                                            }
-                                                            else {
-                                                                fileDispatch({ name: "warrant_stamp_object", value: '' });
-                                                            }
-                                                        }}
-                                                    />
-                                                    업로드
-                                                </Button>
-
-                                            </GridBoxDiv>
-                                            {(fileState.warrant_stamp_url !== '' || (state.warrant_stamp_path && (state.warrant_stamp_path !== ''))) &&
-                                                <GridBoxDiv
-                                                    gtc={`repeat(1, 1fr)`}
-                                                    gap={`10px`}
-                                                    kindOf={`inputFirst`}
-                                                >
-                                                    <Button
-                                                        className={buttonStyles.buttonGrey}
-                                                        variant="contained"
-                                                        id={fileState.warrant_stamp_url !== '' ? fileState.warrant_stamp_url : "https://00nomubucket1.s3.ap-northeast-2.amazonaws.com/" + state.warrant_stamp_path}
-                                                        onClick={(e: any) => downloadImageHandler(e.target.id, state.warrant_stamp_name)}
-                                                    >
-                                                        <DownloadIcon sx={{ marginRight: `5px` }} fontSize="small" />다운로드
-                                                    </Button>
-                                                </GridBoxDiv>
-                                            }
-                                            <LineDiv margin={`20px 0`}></LineDiv>
-                                            <GridBoxDiv
+                                                                              <GridBoxDiv
                                                 gtc={`repeat(1, 1fr)`}
                                                 gap={`10px`}
                                                 kindOf={`inputFirst`}
@@ -408,6 +287,141 @@ const ModalPresenter = ({
 
                                                 </GridBoxDiv>
                                             }
+
+
+                                            {state.warrant_company_type === 1 ? 
+                                            
+                                        
+                                        
+                                         <>
+                                            <GridBoxDiv
+                                                gtc={`8.5fr 1.5fr`}
+                                                gap={`10px`}
+                                                kindOf={`input`}
+                                            >
+                                                <TextField
+                                                    label={`인감 증명서(업체 업로드)`}
+                                                    type='text'
+                                                    color='primary'
+                                                    size='small'
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
+                                                    value={state.warrant_complete_name}
+                                                    disabled={true}
+                                                />
+
+                                                <Button className={buttonStyles.buttonUpload} variant='contained' component="label">
+                                                    <input hidden
+                                                        name={`file_object`}
+                                                        accept="application/pdf"
+                                                        type='file'
+                                                        onChange={(e: any) => {
+                                                            let reader = new FileReader();
+                                                            let file = e.target.files[0];
+                                                            if (file) {
+                                                                reader.onloadend = () => {
+                                                                    fileDispatch({ name: "warrant_complete_object", value: file });
+                                                                    fileDispatch({ name: 'warrant_complete_url', value: reader.result });
+                                                                    // fileDispatch({ name: 'file_kinds', value: 'business' });
+
+                                                                    dispatch({ name: 'warrant_complete_name', value: file.name })
+                                                                };
+                                                                reader.readAsDataURL(file);
+                                                            }
+                                                            else {
+                                                                fileDispatch({ name: "warrant_complete_object", value: '' });
+                                                            }
+                                                        }}
+                                                    />
+                                                    업로드
+                                                </Button>
+
+                                            </GridBoxDiv>
+                                            {(fileState.warrant_complete_url !== '' || (state.warrant_complete_path && (state.warrant_complete_path !== ''))) &&
+                                                <GridBoxDiv
+                                                    gtc={`repeat(1, 1fr)`}
+                                                    gap={`10px`}
+                                                    kindOf={`inputFirst`}
+                                                >
+                                                    <Button
+                                                        className={buttonStyles.buttonGrey}
+                                                        variant="contained"
+                                                        id={fileState.warrant_complete_url !== '' ? fileState.warrant_complete_url : "https://00nomubucket1.s3.ap-northeast-2.amazonaws.com/" + state.warrant_complete_path}
+                                                        onClick={(e: any) => downloadPdfHandler(e.target.id, state.warrant_complete_name)}
+                                                    >
+                                                        <DownloadIcon sx={{ marginRight: `5px` }} fontSize="small" />다운로드
+                                                    </Button>
+                                                </GridBoxDiv>
+                                            }
+                                            <GridBoxDiv
+                                                gtc={`8.5fr 1.5fr`}
+                                                gap={`10px`}
+                                                kindOf={`input`}
+                                            >
+                                                <TextField
+                                                    label={`인감 도장(업체 업로드)`}
+                                                    type='text'
+                                                    color='primary'
+                                                    size='small'
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
+                                                    value={state.warrant_stamp_name ? state.warrant_stamp_name : state.warrant_stamp_path ? "image.png" : ""}
+                                                    disabled={true}
+                                                />
+
+                                                <Button className={buttonStyles.buttonUpload} variant='contained' component="label">
+                                                    <input hidden
+                                                        name={`file_object`}
+                                                        accept='image/gif, image/png, image/jpeg, image/bmp, image/webp'
+                                                        type='file'
+                                                        onChange={(e: any) => {
+                                                            let reader = new FileReader();
+                                                            let file = e.target.files[0];
+                                                            if (file) {
+                                                                reader.onloadend = () => {
+                                                                    fileDispatch({ name: "warrant_stamp_object", value: file });
+                                                                    fileDispatch({ name: 'warrant_stamp_url', value: reader.result });
+                                                                    // fileDispatch({ name: 'file_kinds', value: 'business' });
+
+                                                                    dispatch({ name: 'warrant_stamp_name', value: file.name })
+                                                                };
+                                                                reader.readAsDataURL(file);
+                                                            }
+                                                            else {
+                                                                fileDispatch({ name: "warrant_stamp_object", value: '' });
+                                                            }
+                                                        }}
+                                                    />
+                                                    업로드
+                                                </Button>
+
+                                            </GridBoxDiv>
+                                            {(fileState.warrant_stamp_url !== '' || (state.warrant_stamp_path && (state.warrant_stamp_path !== ''))) &&
+                                                <GridBoxDiv
+                                                    gtc={`repeat(1, 1fr)`}
+                                                    gap={`10px`}
+                                                    kindOf={`inputFirst`}
+                                                >
+                                                    <Button
+                                                        className={buttonStyles.buttonGrey}
+                                                        variant="contained"
+                                                        id={fileState.warrant_stamp_url !== '' ? fileState.warrant_stamp_url : "https://00nomubucket1.s3.ap-northeast-2.amazonaws.com/" + state.warrant_stamp_path}
+                                                        onClick={(e: any) => downloadImageHandler(e.target.id, state.warrant_stamp_name)}
+                                                    >
+                                                        <DownloadIcon sx={{ marginRight: `5px` }} fontSize="small" />다운로드
+                                                    </Button>
+                                                </GridBoxDiv>
+                                            }
+
+                                            </>
+
+
+                                            : null}
+                                            <LineDiv margin={`20px 0`}></LineDiv>
+    
+
 
                                             <GridBoxDiv
                                                 gtc={`repeat(1, 1fr)`}
