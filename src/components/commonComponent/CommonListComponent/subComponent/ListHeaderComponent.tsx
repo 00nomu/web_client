@@ -164,12 +164,12 @@ const ListHeaderComponent = ({
                     checked={allCheck}
                     onChange={allcheckClickHandler}
                 />,
-                '', '등록일', '상호', '개인/법인', '대표자 성명', '업태', '주민등록번호', '주민등록증(첨부)', '사업자등록번호', '사업자등록증(첨부)', '특수관계인 여부', '특수관계인 파악필요 인원', '특수관계인 파악 결과', '환급여부', '최종환급금액', '업체명', ''
+                '', '등록일', '상호', '개인/법인', '대표자 성명', '업태', '주민등록번호', '주민등록증(첨부)', '사업자등록번호', '사업자등록증(첨부)', '인감도장(첨부)','인감증명서(첨부)','특수관계인 여부', '특수관계인 파악필요 인원', '특수관계인 파악 결과', '환급여부', '최종환급금액', '업체명', ''
             ];
             return (
                 <ListGrid
                     kindOf={`header`}
-                    gtc={`repeat(2, 40px) 0.6fr 2fr 0.5fr repeat(2, 0.6fr) repeat(10, 0.9fr) 15px`}
+                    gtc={`repeat(2, 40px) 0.6fr 2fr 0.5fr repeat(2, 0.6fr) repeat(12, 0.9fr) 15px`}
 
                 >
                     {headerList.map((item: any, index: any) => (

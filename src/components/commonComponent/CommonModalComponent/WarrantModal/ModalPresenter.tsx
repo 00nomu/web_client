@@ -386,6 +386,7 @@ const ModalPresenter = ({
                                                                     // fileDispatch({ name: 'file_kinds', value: 'business' });
 
                                                                     dispatch({ name: 'warrant_stamp_name', value: file.name })
+                                                                    dispatch({ name: 'warrant_stamp_image', value: reader.result })
                                                                 };
                                                                 reader.readAsDataURL(file);
                                                             }

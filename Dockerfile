@@ -20,7 +20,6 @@ COPY . /app
 ENV NODE_ENV=production
 
 RUN npm run build
-
 # 도케에게 우리가 서버를 실행할 포트를 말해준다.
 EXPOSE 3000
 

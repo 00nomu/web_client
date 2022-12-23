@@ -37,7 +37,7 @@ const ListBodyComponent = ({
     } = commonState;
 
     const [clickBackgroundColor, setClickBackgroundColor] = useState(""); // 리스트 클릭 시  클릭된 데이터 남아있음
-
+    console.log('dataList', dataList);
     const checkboxClickHandler = (e: any) => {
         const emptyArray = checkboxArray;
         emptyArray[e.target.id].checked = !emptyArray[e.target.id].checked;
@@ -509,7 +509,7 @@ const ListBodyComponent = ({
                         <ListGrid
                             hover={true}
                             kindOf={`lists`}
-                            gtc={`repeat(2, 40px) 0.6fr 2fr 0.5fr repeat(2, 0.6fr) repeat(10, 0.9fr)`}
+                            gtc={`repeat(2, 40px) 0.6fr 2fr 0.5fr repeat(2, 0.6fr) repeat(12, 0.9fr)`}
                             key={index}
                         >
                             <ListCell
@@ -591,6 +591,26 @@ const ListBodyComponent = ({
                                     {item.warrant_business_reg_card_path ? '첨부 O' : '첨부 X'}
                                 </ListCellInner>
                             </ListCell>
+
+                            <ListCell
+                                style={{ color: !item.warrant_stamp_path && 'red' }}
+                                onClick={(e: any) => { listClickHandler(item); }}
+                            >
+                                <ListCellInner>
+                                    {item.warrant_stamp_path ? '첨부 O' : '첨부 X'}
+                                </ListCellInner>
+                            </ListCell>
+
+                            <ListCell
+                                style={{ color: !item.warrant_complete_path && 'red' }}
+                                onClick={(e: any) => { listClickHandler(item); }}
+                            >
+                                <ListCellInner>
+                                    {item.warrant_complete_path ? '첨부 O' : '첨부 X'}
+                                </ListCellInner>
+                            </ListCell>
+
+
                             <ListCell
                                 style={{ color: item.warrant_special_people_boolean === 0 && "red" }}
                                 onClick={(e: any) => { listClickHandler(item); }}
