@@ -15,27 +15,30 @@ const useStyles = makeStyles({
         border: '1px solid ' + Theme.basic_black,
         backgroundColor: Theme.basic_white,
         textAlign: 'left',
-        minHeight: 25,
-        height: 25,
-        maxHeight: 25,
+        minHeight: '25px',
+        height: '25px',
+        maxHeight: '25px',
+        padding:'5px 10px',
     },
     TableTitle: {
         border: '1px solid ' + Theme.basic_black,
         backgroundColor: Theme.basic_white,
         textAlign: 'left',
-        minHeight: 25,
-        height: 25,
-        maxHeight: 25,
-        width: "12%"
+        minHeight: '25px',
+        height: '25px',
+        maxHeight: '25px',
+        width: "12%",
+        padding:'5px 10px',
     },
     TableSubTitle: {
         border: '1px solid ' + Theme.basic_black,
         backgroundColor: Theme.basic_white,
         textAlign: 'left',
-        minHeight: 25,
-        height: 25,
-        maxHeight: 25,
-        width: "25%"
+        minHeight: '25px',
+        height: '25px',
+        maxHeight: '25px',
+        width: "25%",
+        padding:'5px 10px',
     },
 
 });
@@ -58,7 +61,7 @@ const WarrantPrint = (props: any) => {
             <div
                 ref={props.printRef}
             >
-               
+
                     <div
                         style={{
                             padding: "50px",
@@ -175,19 +178,28 @@ const WarrantPrint = (props: any) => {
 
                 if(data.warrant_company_type === 1 && data.warrant_stamp_name !== null) // 법인인데 인감도장 올렸으면 인감도장으로
                 return (
-                    <TableContainer style={{marginTop : 20,}}>
-                        <Table width={'100%'} aria-label="simple table">
-                            <TableRow>
-                                <TableCell className={classes.TableData} style={{width : '50%'}}>대표자 성명</TableCell>
-                                <TableCell className={classes.TableData} style={{width : '50%'}} >인감도장</TableCell>
+                  <>
+                    <TableContainer style={{display:'grid', gridTemplateColumns:'repeat(2, 1fr)', gap:'10px'}}>
+                        <Table style={{height:'130px'}} aria-label="simple table">
+                            <TableRow style={{height:'25px',maxHeight:'25px', padding:'0'}}>
+                              <TableCell className={classes.TableData} style={{textAlign:'center', height:'25px'}}>대표자 성명</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell className={classes.TableData} style={{width : '50%'}}>{data.warrant_owner_name}</TableCell>
-                                <TableCell className={classes.TableData} style={{width : '50%'}}><img style={{ width: "50px", height: "30px" }} src={props.data.warrant_stamp_image} /></TableCell>
+                              <TableCell className={classes.TableData} style={{textAlign:'center', height:'100%', maxHeight:'100%'}}>{data.warrant_owner_name}</TableCell>
+                            </TableRow>
+
+                        </Table>
+                        <Table style={{height:'130px'}} aria-label="simple table">
+
+                            <TableRow style={{height:'25px',maxHeight:'25px', padding:'0'}}>
+                              <TableCell className={classes.TableData} style={{textAlign:'center'}} >인감도장</TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell className={classes.TableData} style={{textAlign:'center', height:'100%', maxHeight:'100%'}}><img style={{ width: "50px", height: "50px",alignSelf:'center', objectFit:'contain'}} src={props.data.warrant_stamp_image} /></TableCell>
                             </TableRow>
                         </Table>
                     </TableContainer>
-
+                    </>
 
 
                 );
@@ -198,16 +210,16 @@ const WarrantPrint = (props: any) => {
 
 
 
-                        
-                    
 
-                       
 
-                                
-                        
+
+
+
+
+
 
                     </div>
-              
+
             </div>
         </div>
     )
