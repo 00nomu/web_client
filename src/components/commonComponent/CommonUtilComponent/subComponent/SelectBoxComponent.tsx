@@ -244,13 +244,14 @@ const SelectBoxComponent = ({
                                     <option key={i} value={warrantSelectData[i]} >{item}</option>
                                 ))}
                                 {commonState.loginData.user_auth < 2 &&
-                                    <option key={4} value={'warrant_manage_code'} >업체명</option>
+                                    <option key={4} value={'company_name'} >업체명</option>
                                 }
                             </Select>
                         }
 
                         {searchSelectBox === '전체' ||
                             searchSelectBox === 'warrant_company_name' ||
+                            searchSelectBox === 'company_name' ||
                             searchSelectBox === 'warrant_owner_name' ||
                             searchSelectBox === 'warrant_company_code' ? (
                             <Input
@@ -261,21 +262,6 @@ const SelectBoxComponent = ({
                                 placeholder={`검색어를 입력 후 엔터를 눌러주세요.`}
                             />
                         )
-                            :
-                            (searchSelectBox === 'warrant_company_name' ||
-                                searchSelectBox === 'warrant_owner_name' ||
-                                searchSelectBox === 'warrant_company_code'
-                            )
-
-                                ?
-
-                                <Input
-                                    kindOf={`search`}
-                                    type={`text`}
-                                    value={searchText}
-                                    onChange={(e: any) => { commonDispatch({ name: "searchText", value: e.target.value }); }}
-                                    placeholder={`검색어를 입력 후 엔터를 눌러주세요.`}
-                                />
                                 :
                                 <>
                                     <Select

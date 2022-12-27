@@ -37,7 +37,7 @@ const ListBodyComponent = ({
     } = commonState;
 
     const [clickBackgroundColor, setClickBackgroundColor] = useState(""); // 리스트 클릭 시  클릭된 데이터 남아있음
-    console.log('dataList', dataList);
+
     const checkboxClickHandler = (e: any) => {
         const emptyArray = checkboxArray;
         emptyArray[e.target.id].checked = !emptyArray[e.target.id].checked;

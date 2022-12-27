@@ -6,7 +6,7 @@ import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
-
+import {Grid} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
@@ -50,7 +50,10 @@ const WarrantPrint = (props: any) => {
 
     const data = props?.data;
 
+    const isEmpty = props?.isEmpty
 
+
+    console.log('isEmpty : ', isEmpty);
 
     const today = new Date();
 
@@ -127,7 +130,26 @@ const WarrantPrint = (props: any) => {
                             </Table>
                         </TableContainer>
                         <span style={{ padding: "30px 0" }}>상기 위임내용에 관한 일체의 행위를 위임합니다.</span>
-                        <span style={{ padding: "30px 0" }}>{data.warrant_sign_date ? <>{data.warrant_sign_date.substring(0, 4)}년 {data.warrant_sign_date.substring(5, 7)}월 {data.warrant_sign_date.substring(8, 10)}일</> : ""}</span>
+
+                        {data.warrant_sign_date ? 
+                               <span style={{ padding: "30px 0" }}>{data.warrant_sign_date.substring(0, 4)}년 {data.warrant_sign_date.substring(5, 7)}월 {data.warrant_sign_date.substring(8, 10)}일</span>
+                                :
+                               <Grid container justifyContent={'center'}>
+                                    <Grid style={{textAlign : 'right'}} item xs={4} >
+                                        년
+
+                                    </Grid>
+                                    <Grid style={{textAlign : 'center'}} item xs={4} >
+                                        월
+
+                                    </Grid>
+                                    <Grid style={{textAlign : 'left'}} item xs={4} >
+                                        일
+
+                                    </Grid>
+                               </Grid>
+                        }
+                     
                         {/* <div style={{ display: "flex" }}>
                             <span style={{}}>위임인 성명 : </span>
                             <div style={{ borderBottom: "1px solid black", paddingLeft: "200px", paddingBottom: "3px" }}>
@@ -141,7 +163,7 @@ const WarrantPrint = (props: any) => {
 
 
         {(function () {
-            if(data.warrant_company_type === 0)
+            if(data.warrant_company_type === 0 && isEmpty === false)
                 return (
                     <TableContainer style={{marginTop : 20,}}>
                         <Table width={'100%'} aria-label="simple table">
@@ -157,7 +179,7 @@ const WarrantPrint = (props: any) => {
                     </TableContainer>
                 );
 
-                if(data.warrant_company_type === 1 && data.warrant_stamp_name === null) // 법인인데 인감도장 안올리면 서명으로
+                if(data.warrant_company_type === 1 && data.warrant_stamp_name === null && isEmpty === false) // 법인인데 인감도장 안올리면 서명으로
                 return (
                     <TableContainer style={{marginTop : 20,}}>
                         <Table width={'100%'} aria-label="simple table">
@@ -176,7 +198,7 @@ const WarrantPrint = (props: any) => {
 
                 );
 
-                if(data.warrant_company_type === 1 && data.warrant_stamp_name !== null) // 법인인데 인감도장 올렸으면 인감도장으로
+                if(data.warrant_company_type === 1 && data.warrant_stamp_name !== null && isEmpty === false) // 법인인데 인감도장 올렸으면 인감도장으로
                 return (
                   <>
                     <TableContainer style={{display:'grid', gridTemplateColumns:'repeat(2, 1fr)', gap:'10px'}}>
@@ -200,6 +222,25 @@ const WarrantPrint = (props: any) => {
                         </Table>
                     </TableContainer>
                     </>
+
+
+                );
+
+                if(isEmpty === true) // 빈양식이면 전부 공란으로
+                return (
+                    <TableContainer style={{marginTop : 20,}}>
+                        <Table width={'100%'} aria-label="simple table">
+                            <TableRow>
+                                <TableCell className={classes.TableData} style={{width : '50%'}}>대표자 성명</TableCell>
+                                <TableCell className={classes.TableData} style={{width : '50%'}} >대표자 서명</TableCell>
+                            </TableRow>
+                            <TableRow >
+                                <TableCell className={classes.TableData} style={{width : '50%'}}>{data.warrant_owner_name}</TableCell>
+                                <TableCell className={classes.TableData} style={{width : '50%', height : 50}}></TableCell>
+                            </TableRow>
+                        </Table>
+                    </TableContainer>
+
 
 
                 );

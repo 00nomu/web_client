@@ -126,14 +126,14 @@ const ModalPresenter = ({
                                     content={() => printRef.current}
                                 />
                                 {printData &&
-                                    <WarrantPrint data={printData} printRef={printRef} />
+                                    <WarrantPrint data={printData} printRef={printRef} isEmpty={false} />
                                 }
                             </InnerBox>
                             <InnerBox>
                                 <Article kindOf={`scroll`}>
                                     <Article kindOf={`padding-r15`}>
                                         <WrapperDiv kindOf={`margin30`}>
-                                                                              <GridBoxDiv
+                                            <GridBoxDiv
                                                 gtc={`repeat(1, 1fr)`}
                                                 gap={`10px`}
                                                 kindOf={`inputFirst`}
@@ -153,6 +153,7 @@ const ModalPresenter = ({
                                                 />
                                             </GridBoxDiv>
                                             {/* <TitleP margin={`30px 0 0`}>사업장 정보</TitleP> */}
+                                            
                                             <GridBoxDiv
                                                 gtc={`repeat(2, 1fr)`}
                                                 gap={`10px`}

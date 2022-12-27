@@ -286,7 +286,7 @@ const ButtonBoxComponent = ({
                             content={() => printRef.current}
                         />
                         {printData &&
-                            <WarrantPrint data={printData} printRef={printRef} />
+                            <WarrantPrint data={printData} printRef={printRef} isEmpty={true}/>
                         }
                         <Button
                             marginRight={`0`}
