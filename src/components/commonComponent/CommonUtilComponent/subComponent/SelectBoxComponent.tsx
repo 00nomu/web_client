@@ -154,7 +154,7 @@ const SelectBoxComponent = ({
                             name={`select_text`}
                             value={searchSelectBox}
                             onChange={(e: any) => { selectBoxChangeHandler(e) }}
-                        >
+                        > 
                             {selectTitle.map((item: any, i: any) => (
                                 <option key={i} value={selectData[i]} >{item} </option>
                             ))}

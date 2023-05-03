@@ -122,8 +122,8 @@ const WarrantPrint = (props: any) => {
                                 <TableRow>
                                     <TableCell colSpan={5} className={classes.TableData} >
                                         위임내용: 하기 서류에 관한 출력 업무 위임의 件<br /><br />
-                                        1. 위임인의 2017년 ~ 2021년 귀속분 종합소득세 신고서<br />
-                                        2. 위임인의 운영한 모든 사업자에서 제출한<br />2015년 ~ 2021년 소득자별 근로소득 원천징수부<br />
+                                        1. 위임인의 2018년 ~ 2022년 귀속분 종합소득세 신고서<br />
+                                        2. 위임인의 운영한 모든 사업자에서 제출한<br />2016년 ~ 2022년 소득자별 근로소득 원천징수부<br />
                                         3. 기타 1,2와 관련한 부속 서류
                                     </TableCell>
                                 </TableRow>
